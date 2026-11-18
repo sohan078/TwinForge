@@ -3,7 +3,7 @@ import type TelemetryState from "../types/telemetryState"
 import { getLatestTelemetry, getTelemetryHistory } from "../api/telemetry";
 import type Telemetry from "../types/telemetry";
 
-const WS_URL = "ws://localhost:8000/ws/telemetry";
+const WS_URL = `${window.location.protocol === "https:" ? "wss:" : "ws:"}//${window.location.host}/ws/telemetry`;
 
 export function useTelemetry() {
 

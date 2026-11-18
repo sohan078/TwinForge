@@ -1,9 +1,5 @@
-import axios from "axios";
+import api from "../services/api";
 import type Telemetry from "../types/telemetry";
-
-const api = axios.create({
-    baseURL: "http://127.0.0.1:8000",
-});
 
 export async function getTelemetryHistory(
     machineId: string,

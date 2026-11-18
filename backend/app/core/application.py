@@ -18,6 +18,7 @@ from app.configs.demo_config import DemoConfig
 from app.infrastructure.repository.sqlite_repository import (
     SQLiteTelemetryRepository,
 )
+import os
 import threading
 from pathlib import Path
 
@@ -28,9 +29,12 @@ class Application:
         self.factory = Factory("TwinForge Factory")
         self.demo_config = DemoConfig(enabled=True, physics_step_seconds=10.0, simulated_seconds_per_tick=3600.0, degradation_rate=0.5)
         self.simulation = SimulationEngine(self.factory, self.demo_config)
-        self.publisher = MQTTPublisher()
+        self.publisher = MQTTPublisher(
+            host=os.getenv("MQTT_HOST", "localhost"),
+            port=int(os.getenv("MQTT_PORT", "1883")),
+        )
         self.websocket_manager = WebSocketManager()
-        self.database = SQLiteDatabase()
+        self.database = SQLiteDatabase(os.getenv("DATABASE_PATH", "twinforge.db"))
         create_schema(self.database)
         self.telemetry_repository = SQLiteTelemetryRepository(self.database)
 
