@@ -31,7 +31,7 @@ class RULModelTrainer:
 
         return model
 
-
+    @staticmethod
     def train_gradient_boosting(
         X_train,
         y_train,

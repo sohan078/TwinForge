@@ -29,6 +29,6 @@ def get_health_assisted_feature(
     return dataframe[HEALTH_ASSISTED_FEATURE].copy()
 
 def get_target_feature(
-        dataframe: pd.DataFrame,
+        dataframe: pd.Series,
 ) -> pd.DataFrame:
     return dataframe[TARGET_COLUMN].copy()
